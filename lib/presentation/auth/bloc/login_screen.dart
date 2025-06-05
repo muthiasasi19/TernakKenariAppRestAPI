@@ -36,4 +36,57 @@ class _LoginScreenState extends State<LoginScreen> {
     _key.currentState?.dispose();
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Form(
+          key: _key,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: 
+            Column (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SpaceHeight(170),
+                Text(
+                  'SELAMAT DATANG KEMBALI',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SpaceHeight(30),
+                CustomTextField(
+                  validator: 'Email tidak boleh kosong',
+                  controller: emailController,
+                  label: 'Email',
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.email),
+                    ),
+                    ),
+                const SpaceHeight(25),
+                CustomTextField(
+                  validator: 'Password tidak boleh koosong',
+                  controller: passwordController,
+                  label: 'Password',
+                  obscureText: !isShowPassword,
+                  prefixIcon: Padding(padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.lock),
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isShowPassword = !isShowPassword;
+                      
+                    });
+                  },
+                  icon: Icon(
+                    isShowPassword ? Icons.visibility : Icons.visibility_off,
+                    color: AppColors.grey,
+                  ),
+                  ),
+                  ),
 }
