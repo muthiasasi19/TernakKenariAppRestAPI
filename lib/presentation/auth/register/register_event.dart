@@ -1,9 +1,9 @@
 import 'package:canary/data/model/request/register_request_model.dart';
 
-sealed class RegisterEvent {
-  class RegisterRequest extends RegisterEvent{
-    final RegisterRequestModel requestModel;
+sealed class RegisterEvent {}
 
-    RegisterRequest({required this.requestModel});
-}
+class RegisterRequested extends RegisterEvent {
+  final RegisterRequestModel requestModel;
+
+  RegisterRequested({required this.requestModel});
 }
