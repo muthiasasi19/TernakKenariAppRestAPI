@@ -1,7 +1,7 @@
 // untuk menghandle endpoint
 import 'dart:convert';
 import 'package:canary/data/model/request/auth/login_request_model.dart';
-import 'package:canary/data/model/response/buyer/login_response_model.dart';
+import 'package:canary/data/model/response/login_response_model.dart';
 import 'package:canary/service/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
