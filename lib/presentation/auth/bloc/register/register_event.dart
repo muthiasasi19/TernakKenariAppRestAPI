@@ -1,4 +1,4 @@
-import 'package:canary/data/model/request/auth/register_request_model.dart';
+part of 'register_bloc.dart';
 
 sealed class RegisterEvent {}
 

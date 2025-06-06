@@ -16,8 +16,8 @@ class PostingRepostory {
   ) async {
     try {
       final response = await _serviceHttpClient.postWithToken(
-        "admin/posting-jual",
-        requestModel.toMap(),
+        'admin/posting-jual',
+        requestModel.toJson(),
       );
       final jsonResponse = json.decode(response.body);
       if (response.statusCode == 201) {

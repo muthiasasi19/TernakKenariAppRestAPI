@@ -1,11 +1,12 @@
-// untuk menghandle endpoint
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:canary/data/model/request/auth/login_request_model.dart';
-import 'package:canary/data/model/response/login_response_model.dart';
+import 'package:canary/data/model/request/auth/register_request_model.dart';
+import 'package:canary/data/model/response/auth/auth_response_model.dart';
 import 'package:canary/service/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:canary/data/model/request/auth/register_request_model.dart';
 
 class AuthRepository {
   final ServiceHttpClient _serviceHttpClient;
@@ -13,7 +14,7 @@ class AuthRepository {
 
   AuthRepository(this._serviceHttpClient);
 
-  Future<Either<String, LoginResponseModel>> login(
+  Future<Either<String, AuthResponseModel>> login(
     LoginRequestModel requestModel,
   ) async {
     try {
@@ -23,21 +24,24 @@ class AuthRepository {
       );
       final jsonResponse = json.decode(response.body);
       if (response.statusCode == 200) {
-        final loginResponse = LoginResponseModel.fromMap(jsonResponse);
+        final loginResponse = AuthResponseModel.fromMap(jsonResponse);
         await secureStorage.write(
           key: "authToken",
-          value: loginResponse.data!.token,
+          value: loginResponse.user!.token,
         );
         await secureStorage.write(
-          key: "UserRole",
-          value: loginResponse.data!.role,
+          key: "userRole",
+          value: loginResponse.user!.role,
         );
+        log("Login successful: ${loginResponse.message}");
         return Right(loginResponse);
       } else {
+        log("Login failed: ${jsonResponse['message']}");
         return Left(jsonResponse['message'] ?? "Login failed");
       }
     } catch (e) {
-      return Left("An error occured while logging in.");
+      log("Error in login: $e");
+      return Left("An error occurred while logging in.");
     }
   }
 
@@ -50,14 +54,17 @@ class AuthRepository {
         requestModel.toMap(),
       );
       final jsonResponse = json.decode(response.body);
-      final registerResponse = jsonResponse['message'];
       if (response.statusCode == 201) {
+        final registerResponse = jsonResponse['message'] as String;
+        log("Registration successful: ${registerResponse}");
         return Right(registerResponse);
       } else {
-        return Left(jsonResponse['message'] ?? "Registrattion failed");
+        log("Registration failed: ${jsonResponse['message']}");
+        return Left(jsonResponse['message'] ?? "Registration failed");
       }
     } catch (e) {
-      return Left("An error occured while registering. :$e");
+      log("Error in registration: $e");
+      return Left("An error occurred while registering.");
     }
   }
 }

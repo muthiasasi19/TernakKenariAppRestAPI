@@ -3,10 +3,11 @@ import 'package:canary/core/components/spaces.dart';
 import 'package:canary/core/core.dart';
 import 'package:canary/data/model/request/auth/login_request_model.dart';
 import 'package:canary/presentation/auth/bloc/login/login_bloc.dart';
-import 'package:canary/presentation/auth/bloc/login/login_state.dart';
+import 'package:canary/presentation/auth/bloc/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:canary/presentation/buyer/profile/buyer_profile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -68,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SpaceHeight(25),
                 CustomTextField(
-                  validator: 'Password tidak boleh koosong',
+                  validator: 'Password tidak boleh kosong',
                   controller: passwordController,
                   label: 'Password',
                   obscureText: !isShowPassword,
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           state.responseModel.user?.role?.toLowerCase();
                       if (role == 'admin') {
                         context.pushAndRemoveUntil(
-                          const AdminConfirmScreen(),
+                          const BuyerProfilePage(),
                           (route) => false,
                         );
                       } else if (role == 'buyer') {
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SnackBar(content: Text(state.responseModel.message!)),
                         );
                         context.pushAndRemoveUntil(
-                          const BuyerProfileScreen(),
+                          const BuyerProfilePage(),
                           (route) => false,
                         );
                       } else {
@@ -129,6 +130,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );
+                                  context.read<LoginBloc>().add(
+                                    LoginRequested(requestModel: request),
+                                  );
                                 }
                               },
                       label: state is LoginLoading ? 'Memuat...' : 'Masuk',
@@ -138,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SpaceHeight(20),
                 Text.rich(
                   TextSpan(
-                    text: 'Belum memiliki akun? Silahkan',
+                    text: 'Belum memiliki akun? Silahkan ',
                     style: TextStyle(
                       color: AppColors.grey,
                       fontSize: MediaQuery.of(context).size.width * 0.03,
