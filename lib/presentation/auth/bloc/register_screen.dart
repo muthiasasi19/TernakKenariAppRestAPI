@@ -41,4 +41,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _key.currentState?.dispose();
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Form(
+          key: _key,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SpaceHeight(100),
+                Text(
+                  'DAFTAR AKUN BARU',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SpaceHeight(30),
+                CustomTextField(
+                  validator: 'Username tidak boleh kosong',
+                  controller: namaController,
+                  label: 'Username',
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.person),
+                  ),
+                ),
+                const SpaceHeight(25),
+                CustomTextField(
+                  validator: 'Email tidak boleh kosong',
+                  controller: emailController,
+                  label: 'Email',
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.email),
+                  ),
+                ),
+                const SpaceHeight(25),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        validator: 'Password tidak boleh kosong',
+                        controller: passwordController,
+                        label: 'Password',
+                        obscureText: !isShowPassword,
+                        prefixIcon: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.lock),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isShowPassword = !isShowPassword;
+                            });
+                          },
+                          icon: Icon(
+                            isShowPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: AppColors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
 }
