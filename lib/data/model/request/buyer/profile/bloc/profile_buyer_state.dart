@@ -13,10 +13,10 @@ final class ProfileBuyerLoaded extends ProfileBuyerState {
   ProfileBuyerLoaded({required this.profile});
 }
 
-final class ProfilBuyerError extends ProfileBuyerState {
+final class ProfileBuyerError extends ProfileBuyerState {
   final String message;
 
-  ProfilBuyerError({required this.message});
+  ProfileBuyerError({required this.message});
 }
 
 final class ProfileBuyerAdded extends ProfileBuyerState {
@@ -25,8 +25,8 @@ final class ProfileBuyerAdded extends ProfileBuyerState {
   ProfileBuyerAdded({required this.profile});
 }
 
-final class ProfileBuyerAddedError extends ProfileBuyerState {
+final class ProfileBuyerAddError extends ProfileBuyerState {
   final String message;
 
-  ProfileBuyerAddedError({required this.profile});
+  ProfileBuyerAddError({required this.message});
 }
