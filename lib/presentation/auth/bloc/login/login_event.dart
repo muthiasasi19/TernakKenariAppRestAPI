@@ -1,4 +1,4 @@
-import 'package:canary/data/model/request/login_request_model.dart';
+part of 'login_bloc.dart';
 
 sealed class LoginEvent {}
 

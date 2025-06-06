@@ -16,7 +16,7 @@ class AnakRepository {
     try {
       final response = await _serviceHttpClient.postWithToken(
         "admin/anak",
-        requestModel.toJson(),
+        requestModel.toMap(),
       );
 
       if (response.statusCode == 201) {

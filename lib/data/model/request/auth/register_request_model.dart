@@ -4,15 +4,13 @@ class RegisterRequestModel {
   final String? username;
   final String? email;
   final String? password;
-  final String? passwordConfirmation;
   final int? roleId;
 
   RegisterRequestModel({
     this.username,
     this.email,
     this.password,
-    this.passwordConfirmation,
-    this.roleId,
+    this.roleId = 2,
   });
 
   factory RegisterRequestModel.fromJson(String str) =>
@@ -25,7 +23,6 @@ class RegisterRequestModel {
         username: json["username"],
         email: json["email"],
         password: json["password"],
-        passwordConfirmation: json["password_confirmation"],
         roleId: json["role_id"],
       );
 
@@ -33,7 +30,6 @@ class RegisterRequestModel {
     "username": username,
     "email": email,
     "password": password,
-    "password_confirmation": passwordConfirmation,
     "role_id": roleId,
   };
 }

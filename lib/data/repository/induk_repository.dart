@@ -16,7 +16,7 @@ class IndukRepository {
     try {
       final response = await _serviceHttpClient.postWithToken(
         "admin/induk",
-        requestModel.toJson(),
+        requestModel.toMap(),
       );
 
       if (response.statusCode == 201) {
