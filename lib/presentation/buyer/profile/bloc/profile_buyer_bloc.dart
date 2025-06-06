@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:canary/data/model/request/buyer/buyer_profil_request_model.dart';
+import 'package:canary/data/model/response/buyer/buyer_profile_response_model.dart';
+import 'package:canary/data/repository/profile_buyer_repository.dart';
 
 part 'profile_buyer_event.dart';
 part 'profile_buyer_state.dart';

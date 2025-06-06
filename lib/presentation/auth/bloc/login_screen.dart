@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           state.responseModel.user?.role?.toLowerCase();
                       if (role == 'admin') {
                         context.pushAndRemoveUntil(
-                          const BuyerProfilePage(),
+                          const AdminConfirmScreen(),
                           (route) => false,
                         );
                       } else if (role == 'buyer') {
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SnackBar(content: Text(state.responseModel.message!)),
                         );
                         context.pushAndRemoveUntil(
-                          const BuyerProfilePage(),
+                          const BuyerProfileScreen(),
                           (route) => false,
                         );
                       } else {

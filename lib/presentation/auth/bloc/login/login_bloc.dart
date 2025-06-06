@@ -1,9 +1,9 @@
-import 'package:canary/data/repository/auth_repository.dart';
-import 'package:canary/presentation/auth/bloc/login/login_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:canary/data/model/request/auth/login_request_model.dart';
+import 'package:canary/data/repository/auth_repository.dart';
+import 'package:canary/data/model/response/auth/auth_response_model.dart';
+part 'login_event.dart';
+part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
